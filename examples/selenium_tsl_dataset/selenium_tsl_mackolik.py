@@ -7,7 +7,7 @@ import pandas as pd
 import time
 
 # Specifying the location of chromedriver
-chromedriver = "E:/Desktop/Project/ProjectsWS/chromedriver.exe"
+chromedriver = "__PATH__/chromedriver.exe"
 
 # Specifying incognito mode as you launch your browser[OPTIONAL]
 option = webdriver.ChromeOptions()
@@ -158,5 +158,5 @@ df["Date"] = pd.to_datetime(df["Date"], dayfirst=True).dt.date
 
 df.sort_values(by=['Date'], inplace=True, ascending=True)
 
-df.to_excel('tsl_dataset_son.xlsx', index=False)
+df.to_excel('tsl_dataset.xlsx', index=False)
 
