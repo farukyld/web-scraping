@@ -14,6 +14,7 @@ chromedriver = "E:/Desktop/Project/ProjectsWS/chromedriver.exe"
 # Specifying incognito mode as you launch your browser[OPTIONAL]
 option = webdriver.ChromeOptions()
 option.add_argument("--incognito")
+option.add_argument("--start-maximized")
 
 # Create new Instance of Chrome in incognito mode
 driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=option)
@@ -21,7 +22,10 @@ driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=option)
 driver.get(
     "https://www.tripadvisor.co.uk/Restaurant_Review-g186338-d5122082-Reviews-Alexander_The_Great-London_England.html#REVIEWS")
 
-time.sleep(1)
+time.sleep(3)
+cookie_button = driver.find_element_by_id(
+            "_evidon-accept-button")
+cookie_button.click()
 
 page_numbers = driver.find_elements_by_xpath("//div[@class='pageNumbers']")
 
@@ -39,9 +43,9 @@ managerReply_list = []
 for x in range(max_page_number):
 
     if x != 0:
-        time.sleep(1)
+        time.sleep(2)
         next_page_button = driver.find_elements_by_xpath(
-            "//a[@class='nav next ui_button primary  cx_brand_refresh_phase2']")
+            "//a[@class='nav next ui_button primary']")
         next_page_button[0].click()
         time.sleep(1)
 
