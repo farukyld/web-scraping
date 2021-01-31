@@ -62,21 +62,29 @@ for xx, yy in zip(season_list, season_name):
         seas = str(yy.split("/")[0])
     else:
         seas = str(int(yy.split("/")[0]) - 1)
-    element = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT, "Fikstür")))
-    element.click()
+    try:
+        element = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT, "Fikstür")))
+        element.click()
 
-    cboWeek = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.ID, "cboWeek")))
-    cboWeek = Select(cboWeek)
-    options = cboWeek.options
+        cboWeek = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.ID, "cboWeek")))
+        cboWeek = Select(cboWeek)
+        options = cboWeek.options
+    except:
+        options = [1]
+        pass
     week = 0
     for index in range(0, len(options)):
-        cboWeek.select_by_index(index)
-        time.sleep(1.5)
-        table = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dvFixtureInner")))
-        trs = table.find_elements_by_tag_name("tr")
+        try:
+            cboWeek.select_by_index(index)
+            time.sleep(1.5)
+            table = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dvFixtureInner")))
+            trs = table.find_elements_by_tag_name("tr")
+        except:
+            table = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "dvResults")))
+            trs = table.find_elements_by_tag_name("tr")
         week += 1
         for a in trs:
-            if "Fikstür" in a.text:
+            if "Fikstür" in a.text or "1. Maçlar" in a.text or "2. Maçlar" in a.text:
                 continue
             else:
                 tds = a.find_elements_by_tag_name("td")
