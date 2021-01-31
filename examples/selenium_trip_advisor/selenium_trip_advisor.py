@@ -9,7 +9,7 @@ def remove_items_from_list(ordered_list, temp):
             del ordered_list[i]
 
 
-chromedriver = "E:/Desktop/Project/ProjectsWS/chromedriver.exe"
+chromedriver = "__PATH__/chromedriver.exe"
 
 # Specifying incognito mode as you launch your browser[OPTIONAL]
 option = webdriver.ChromeOptions()
